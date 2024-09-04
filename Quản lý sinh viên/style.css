@@ -16,7 +16,6 @@ h1, h2{
     margin: 20px auto;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-container label {
@@ -48,7 +47,6 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -61,7 +59,6 @@ button:hover {
     margin: 30px auto;
     border-collapse: collapse;
     background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
@@ -76,12 +73,4 @@ button:hover {
     background-color: #f5f5f5;
     font-weight: 600;
     color: #555;
-}
-
-#table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-#table tr:hover {
-    background-color: #f1f1f1;
 }
