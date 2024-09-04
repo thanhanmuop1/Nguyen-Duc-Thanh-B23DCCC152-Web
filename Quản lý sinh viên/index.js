@@ -46,7 +46,7 @@ class Management{
     addStudent(){
         let name = document.getElementById('name').value;
         let id = document.getElementById('id').value;
-        let gender = document.querySelector('input[name="gender"]:checked').value;
+        let gender = document.getElementById('gender').value;
         let birthday = document.getElementById('birthday').value;
         let address = document.getElementById('address').value;
 
