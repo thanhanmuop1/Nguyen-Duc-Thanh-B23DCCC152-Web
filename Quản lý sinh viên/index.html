@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Quản lý sinh viên</h1>
+
+    <form id="form">
+      <label for="id">Mã sinh viên:</label>
+      <input type="text" id="id" name="id"><br><br>
+  
+      <label for="name">Họ tên:</label>
+      <input type="text" id="name" name="name"><br><br>
+  
+      <label for="gender">Giới tính:</label>
+      <input type="radio" id="male" name="gender" value="Nam">
+      <label for="male">Nam</label>
+      <input type="radio" id="female" name="gender" value="Nữ">
+      <label for="female">Nữ</label><br><br>
+  
+      <label for="birthday">Ngày sinh:</label>
+      <input type="date" id="birthday" name="birthday"><br><br>
+  
+      <label for="address">Quê quán:</label>
+      <input type="text" id="address" name="address"><br><br>
+  
+      <button type="button" onclick="addStudent()">Thêm sinh viên</button>
+    </form>
+    <br>
+  
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Mã sinh viên</th>
+          <th>Họ tên</th>
+          <th>Giới tính</th>
+          <th>Ngày sinh</th>
+          <th>Quê quán</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <script src="index.js"></script>
+</body>
+</html>
