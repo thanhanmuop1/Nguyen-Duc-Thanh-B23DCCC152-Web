@@ -36,11 +36,6 @@ class Management{
             row.insertCell().textContent = student.address;
 
             let cell = row.insertCell();
-            let edit = document.createElement('button');
-            edit.textContent = 'Sửa';
-            edit.addEventListener('click', () => this.toggleEditMode(i));
-            cell.appendChild(edit);
-
             let del = document.createElement('button');
             del.textContent = 'Xoá';
             del.addEventListener('click', () => this.deleteStudent(i));
@@ -48,35 +43,9 @@ class Management{
         }
     }
 
-    toggleEditMode(index) {
-        let row = document.getElementById('table').rows[index + 1];
-        let student = this.students[index];
-
-        if (row.classList.contains('edit-mode')) {
-          for (let i = 0; i < row.cells.length - 1; i++) {
-            let cell = row.cells[i];
-            let input = cell.querySelector('input');
-            this.students[index][Object.keys(student)[i]] = input.value;
-            cell.textContent = input.value;
-          }
-          row.classList.remove('edit-mode');
-        } else {
-          for (let i = 0; i < row.cells.length - 1; i++) {
-            let cell = row.cells[i];
-            let input = document.createElement('input');
-            input.type = i === 3 ? 'date' : 'text';
-            input.value = cell.textContent;
-            cell.innerHTML = '';
-            cell.appendChild(input);
-          }
-          row.classList.add('edit-mode');
-        }
-        this.saveStudents();
-      }
-
     addStudent(){
-        let name = document.getElementById('name').value;
-        let id = document.getElementById('id').value;
+        let name = document.getElementById('name').value.trim();
+        let id = document.getElementById('id').value.trim();
         let gender = document.querySelector('input[name="gender"]:checked').value;
         let birthday = document.getElementById('birthday').value;
         let address = document.getElementById('address').value;
