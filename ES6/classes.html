@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Member {
+            constructor() {
+              this.name = "Dương Minh Trí";
+            }
+        }
+        var x = new Member();
+        console.log(x.name);
+    </script>
+
+    <script>
+        class Member {
+            constructor() {
+                this.name = "Dương Minh Trí";
+            }
+          
+            memberName() {
+                return this.name;
+            }
+        }
+        var x = new Member();
+        console.log(x.memberName());
+    </script>
+
+    <script>
+        class Member {
+            constructor() {
+              this.name = "Dương Minh Trí";
+            }
+          
+            memberName() {
+              return this.name;
+            }
+        }
+          
+        class User extends Member {
+            constructor(name, age) {
+                super(name);
+                this.age = 4;
+            }
+          
+            memberInfo() {
+                return this.memberName() + 'Tuổi:' + this.age;
+            }
+        }
+        var x = new User();
+        console.log(x.memberInfo());
+    </script>
+</body>
+</html>
