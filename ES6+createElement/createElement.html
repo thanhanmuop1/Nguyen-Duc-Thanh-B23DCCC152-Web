@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="add"></div>
+    <script>
+        var h1 = document.createElement("h1");
+        h1.innerHTML = "hihi world";
+        h1.className = "classChild";
+        h1.id = "idChild"
+        h1.style = "background-color: yellow; color:red; font-size:50px; width: 500px; height:300px; position: relative";
+        document.querySelector(".add").appendChild(h1);
+        var div = document.createElement("div");
+        div.className = "rectangle";
+        div.style = "background-color: red; color:red; width: 100%; height:200px; position: absolute";
+        document.querySelector(".classChild").appendChild(div);
+    </script>
+</body>
+</html>
