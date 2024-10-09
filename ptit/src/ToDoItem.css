@@ -5,6 +5,10 @@
     border-bottom: 1px solid #ccc;
 }
 
+.ToDoItem:hover:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
 .content {
     display: flex;
     flex-direction: column;
