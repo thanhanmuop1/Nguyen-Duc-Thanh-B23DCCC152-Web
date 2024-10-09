@@ -93,18 +93,17 @@
 }
 
 .due-soon {
-  color: red; /* Màu đỏ cho các task còn 1 ngày */
+  color: red;
 }
 
 .due-upcoming {
-  color: orange; /* Màu cam cho các task từ 1 đến 7 ngày */
+  color: orange;
 }
 
 .due-later {
-  color: green; /* Màu xanh lá cây cho các task lớn hơn 7 ngày */
+  color: green;
 }
 
-/* Đảm bảo rằng task đã hoàn thành sẽ bị gạch ngang */
 .completed {
   text-decoration: line-through;
   color: grey;
