@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToDoItem from './ToDoItem';
 import './ToDoList.css';
 
@@ -30,6 +30,17 @@ const ToDoList = () => {
   const toggleTaskCompletion = (id) => {
     setTasks(tasks.map(tasks => tasks.id === id ? {...tasks, completed: !tasks.completed} : tasks))
   }
+
+  const sortTasksByDueDate = () => {
+    setTasks((prevTasks) =>
+      [...prevTasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    );
+  };
+
+  useEffect(() => {
+    sortTasksByDueDate();
+  }, [tasks]);
+
 
   return (
     <div className="todo-list">
