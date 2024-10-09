@@ -1,0 +1,28 @@
+.todo-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+  
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+  
+.add-task {
+    display: flex;
+    align-items: center;
+    color: red;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.no-tasks {
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

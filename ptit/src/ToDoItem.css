@@ -1,0 +1,107 @@
+.ToDoItem{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 10px;
+}
+  
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+  
+.title.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.due-date {
+    font-size: 16px;
+}
+
+.ToDoItem input[type="checkbox"] {
+    appearance: none; /* Loại bỏ kiểu mặc định của checkbox */
+    -webkit-appearance: none; /* Loại bỏ kiểu mặc định cho trình duyệt WebKit */
+    -moz-appearance: none; /* Loại bỏ kiểu mặc định cho Firefox */
+    width: 20px; /* Đặt kích thước checkbox */
+    height: 20px;
+    background-color: #fff; /* Màu nền */
+    border: 2px solid #000; /* Đặt viền */
+    border-radius: 50%; /* Biến checkbox thành hình tròn */
+    position: relative;
+    cursor: pointer;
+}
+
+.ToDoItem input[type="checkbox"]:checked {
+    background-color: #007bff; /* Màu nền khi được chọn */
+    border-color: #007bff;
+}
+
+.ToDoItem input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Biểu tượng dấu check (dùng mã Unicode) */
+    color: white; /* Màu của dấu check */
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .delete-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .add-task {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .add-task input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .add-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+.add-btn:hover {
+    background-color: darkred;
+}
+
+.due-soon {
+  color: red; /* Màu đỏ cho các task còn 1 ngày */
+}
+
+.due-upcoming {
+  color: orange; /* Màu cam cho các task từ 1 đến 7 ngày */
+}
+
+.due-later {
+  color: green; /* Màu xanh lá cây cho các task lớn hơn 7 ngày */
+}
+
+/* Đảm bảo rằng task đã hoàn thành sẽ bị gạch ngang */
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
