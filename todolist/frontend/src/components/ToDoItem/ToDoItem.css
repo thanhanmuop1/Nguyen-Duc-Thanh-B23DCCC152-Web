@@ -1,0 +1,163 @@
+.ToDoItem{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.ToDoItem:hover {
+  background-color: #f9f9f9;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 10px;
+}
+  
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+  
+.title.completed {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.description {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.due-date {
+    font-size: 16px;
+    margin: 0;
+}
+
+.ToDoItem input[type="checkbox"] {
+    appearance: none; /* Loại bỏ kiểu mặc định của checkbox */
+    -webkit-appearance: none; /* Loại bỏ kiểu mặc định cho trình duyệt WebKit */
+    -moz-appearance: none; /* Loại bỏ kiểu mặc định cho Firefox */
+    width: 20px; /* Đặt kích thước checkbox */
+    height: 20px;
+    background-color: #fff; /* Màu nền */
+    border: 2px solid #000; /* Đặt viền */
+    border-radius: 50%; /* Biến checkbox thành hình tròn */
+    position: relative;
+    cursor: pointer;
+}
+
+.ToDoItem input[type="checkbox"]:hover::before {
+    content: "\2713";
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ToDoItem input[type="checkbox"]:checked {
+    background-color: #007bff; /* Màu nền khi được chọn */
+    border-color: #007bff;
+}
+
+.ToDoItem input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Biểu tượng dấu check (dùng mã Unicode) */
+    color: white; /* Màu của dấu check */
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .add-task {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .add-task input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .add-btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+.add-btn:hover {
+    background-color: darkred;
+}
+
+.due-soon {
+  color: red;
+}
+
+.due-upcoming {
+  color: orange;
+}
+
+.due-later {
+  color: green;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.edit-btn {
+  background-color: #1890ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-right: 8px;
+}
+
+.edit-btn:hover {
+  background-color: #40a9ff;
+}
+.ToDoItem .ant-btn-dangerous {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(255, 77, 79, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ToDoItem .ant-btn-dangerous:hover {
+  background-color: #ff7875;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(255, 77, 79, 0.3);
+}
+
+.ToDoItem .ant-btn-dangerous:active {
+  background-color: #f5222d;
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(255, 77, 79, 0.2);
+}
