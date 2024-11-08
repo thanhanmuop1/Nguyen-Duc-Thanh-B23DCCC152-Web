@@ -5,42 +5,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
   
-.add-task {
+.todo-header {
     display: flex;
-    gap: 10px;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.add-task input[type="text"],
-.add-task input[type="date"] {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.add-task input[type="text"] {
-    flex: 1;
-}
-
-.add-btn {
-    background-color: #1890ff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-.add-btn:hover {
-    background-color: #40a9ff;
-}
-
-.add-btn:active {
-    background-color: #096dd9;
+.todo-header h2 {
+    margin: 0;
 }
 
 .no-tasks {
