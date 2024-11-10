@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Drawer, Popconfirm, Button, Modal, Input, Dropdown, Space } from 'antd';
+import { Collapse, Drawer, Popconfirm, Button, Modal, Input, Dropdown, Space, Tabs, Select } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import axiosInstance from '../axios';
 import ToDoItem from '../ToDoItem/ToDoItem';
 import './ToDoList.css';  
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 const ToDoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -17,6 +18,7 @@ const ToDoList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('default');
+  const [priority, setPriority] = useState('normal');
 
   // Fetch tasks from the server
   useEffect(() => {
@@ -32,7 +34,8 @@ const ToDoList = () => {
         title: newTaskTitle,
         description: newTaskDescription,
         dueDate: new Date(newTaskDueDate).toISOString(),
-        completed: 0
+        completed: 0,
+        priority: priority
       };
 
       axiosInstance.post('/todos', newTask)
@@ -76,7 +79,7 @@ const ToDoList = () => {
       .catch(error => console.error('Error updating task:', error));
   };
 
-  // Rút gọn hàm sortTasks
+  // Sort tasks
   const sortTasks = (tasksToSort) => {
     const sortedTasks = [...tasksToSort];
     switch (sortBy) {
@@ -89,7 +92,7 @@ const ToDoList = () => {
     }
   };
 
-  // Rút gọn hàm filterTasks
+  // Filter tasks
   const filterTasks = (tasks) => {
     const filteredTasks = tasks.filter(task => 
       task.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -97,11 +100,11 @@ const ToDoList = () => {
     return sortTasks(filteredTasks);
   };
 
-  // Rút gọn các biến tasks đã lọc
+  // Handle tasks
   const activeTasks = filterTasks(tasks.filter(task => task.completed === 0));
   const completedTasks = filterTasks(tasks.filter(task => task.completed === 1));
 
-  // Rút gọn các hàm xử lý
+  // Handle edit
   const handleEdit = (task) => {
     setEditingTask(task);
     setDrawerVisible(true);
@@ -140,12 +143,130 @@ const ToDoList = () => {
     setModalVisible(false);
   };
 
-  // Rút gọn menu items
+  // Sort items
   const sortItems = [
     { key: 'default', label: 'Mặc định' },
     { key: 'dueDate', label: 'Theo ngày hết hạn' },
     { key: 'title', label: 'Theo tên nhiệm vụ' }
   ];
+
+  // Render list
+  const renderNormalList = (tasks) => {
+    return tasks.length === 0 ? (
+      <p className='no-tasks'>Không có công việc nào</p>
+    ) : (
+      tasks.map((task) => (
+        <ToDoItem 
+          key={task.id} 
+          task={task} 
+          onToggle={toggleTaskCompletion} 
+          onDelete={deleteTask}
+          onEdit={handleEdit}
+        />
+      ))
+    );
+  };
+
+  const renderPriorityList = (tasks) => {
+    const highPriorityTasks = tasks.filter(task => task.priority === 'high');
+    const mediumPriorityTasks = tasks.filter(task => task.priority === 'medium');
+    const lowPriorityTasks = tasks.filter(task => task.priority === 'low');
+    const defaultPriorityTasks = tasks.filter(task => !task.priority || task.priority === 'normal');
+
+    return (
+      <Collapse>
+        <Panel 
+          header={`Ưu tiên cao (${highPriorityTasks.length})`} 
+          key="high"
+        >
+          {highPriorityTasks.length === 0 ? (
+            <p className='no-tasks'>Không có công việc nào</p>
+          ) : (
+            highPriorityTasks.map((task) => (
+              <ToDoItem 
+                key={task.id} 
+                task={task} 
+                onToggle={toggleTaskCompletion} 
+                onDelete={deleteTask}
+                onEdit={handleEdit}
+              />
+            ))
+          )}
+        </Panel>
+        <Panel 
+          header={`Ưu tiên trung bình (${mediumPriorityTasks.length})`} 
+          key="medium"
+        >
+          {mediumPriorityTasks.length === 0 ? (
+            <p className='no-tasks'>Không có công việc nào</p>
+          ) : (
+            mediumPriorityTasks.map((task) => (
+              <ToDoItem 
+                key={task.id} 
+                task={task} 
+                onToggle={toggleTaskCompletion} 
+                onDelete={deleteTask}
+                onEdit={handleEdit}
+              />
+            ))
+          )}
+        </Panel>
+        <Panel 
+          header={`Ưu tiên thấp (${lowPriorityTasks.length})`} 
+          key="low"
+        >
+          {lowPriorityTasks.length === 0 ? (
+            <p className='no-tasks'>Không có công việc nào</p>
+          ) : (
+            lowPriorityTasks.map((task) => (
+              <ToDoItem 
+                key={task.id} 
+                task={task} 
+                onToggle={toggleTaskCompletion} 
+                onDelete={deleteTask}
+                onEdit={handleEdit}
+              />
+            ))
+          )}
+        </Panel>
+        {defaultPriorityTasks.length > 0 && (
+          <Panel 
+            header={`Chưa phân loại (${defaultPriorityTasks.length})`} 
+            key="default"
+          >
+            {defaultPriorityTasks.map((task) => (
+              <ToDoItem 
+                key={task.id} 
+                task={task} 
+                onToggle={toggleTaskCompletion} 
+                onDelete={deleteTask}
+                onEdit={handleEdit}
+              />
+            ))}
+          </Panel>
+        )}
+      </Collapse>
+    );
+  };
+
+  const activeTasksContent = (
+    <div className="active-tasks">
+      <Tabs
+        items={[
+          {
+            key: 'all',
+            label: 'Tất cả',
+            children: renderNormalList(activeTasks)
+          },
+          {
+            key: 'priority',
+            label: 'Danh sách ưu tiên',
+            children: renderPriorityList(activeTasks)
+          }
+        ]}
+      />
+    </div>
+  );
 
   return (
     <>
@@ -199,6 +320,15 @@ const ToDoList = () => {
               onChange={(e) => setNewTaskDescription(e.target.value)}
               rows={4}
             />
+            <Select
+              value={priority}
+              onChange={(value) => setPriority(value)}
+              style={{ width: '100%' }}
+            >
+              <Option value="high">Ưu tiên cao</Option>
+              <Option value="medium">Ưu tiên trung bình</Option>
+              <Option value="low">Ưu tiên thấp</Option>
+            </Select>
             <input 
               type="date" 
               style={{ width: '100%', padding: '4px 11px', borderRadius: '6px', border: '1px solid #d9d9d9' }}
@@ -207,22 +337,7 @@ const ToDoList = () => {
             />
           </div>
         </Modal>
-        <div className="active-tasks">
-          <h2>Công việc cần làm</h2>
-          {activeTasks.length === 0 ? (
-            <p className='no-tasks'>Hiện tại không có việc gì cần hoàn thành</p>
-          ) : (
-            activeTasks.map((task) => (
-              <ToDoItem 
-                key={task.id} 
-                task={task} 
-                onToggle={toggleTaskCompletion} 
-                onDelete={deleteTask}
-                onEdit={handleEdit}
-              />
-            ))
-          )}
-        </div>
+        {activeTasksContent}
         <Collapse className="completed-tasks">
           <Panel header={`Đã hoàn thành (${completedTasks.length})`} key="1">
             {completedTasks.map((task) => (

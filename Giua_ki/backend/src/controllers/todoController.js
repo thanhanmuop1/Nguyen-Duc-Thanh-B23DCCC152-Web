@@ -8,14 +8,15 @@ exports.getAllTodos = (req, res) => {
 };
 
 exports.createTodo = (req, res) => {
-    const { title, description, dueDate } = req.body;
-    Todo.create(title, description, dueDate, (err, result) => {
+    const { title, description, dueDate, priority } = req.body;
+    Todo.create(title, description, dueDate, priority, (err, result) => {
         if (err) return res.status(500).json({ error: err });
         res.status(201).json({
             id: result.insertId,
             title,
             description,
             dueDate,
+            priority,
             completed: 0
         });
     });
@@ -23,15 +24,16 @@ exports.createTodo = (req, res) => {
 
 exports.updateTodo = (req, res) => {
     const { id } = req.params;
-    const { title, description, dueDate, completed } = req.body;
-    Todo.update(id, title, description, dueDate, completed, (err, result) => {
+    const { title, description, dueDate, completed, priority } = req.body;
+    Todo.update(id, title, description, dueDate, completed, priority, (err, result) => {
         if (err) return res.status(500).json({ error: err });
         res.status(200).json({
             id: parseInt(id),
             title,
             description,
             dueDate,
-            completed
+            completed,
+            priority
         });
     });
 };

@@ -5,12 +5,12 @@ const Todo = {
         db.query('SELECT * FROM todos', calback);
     },
 
-    create: (title, description, dueDate, callback) => {
-        db.query('INSERT INTO todos (title, description, dueDate) VALUES (?, ?, ?)', [title, description, dueDate], callback);
+    create: (title, description, dueDate, priority, callback) => {
+        db.query('INSERT INTO todos (title, description, dueDate, priority) VALUES (?, ?, ?, ?)', [title, description, dueDate, priority], callback);
     },
 
-    update: (id, title, description, dueDate, completed, callback) => {
-        db.query('UPDATE todos SET title = ?, description = ?, dueDate = ?, completed = ? WHERE id = ?', [title, description, dueDate, completed, id], callback);
+    update: (id, title, description, dueDate, completed, priority, callback) => {
+        db.query('UPDATE todos SET title = ?, description = ?, dueDate = ?, completed = ?, priority = ? WHERE id = ?', [title, description, dueDate, completed, priority, id], callback);
     },
 
     delete: (id, callback) => {
